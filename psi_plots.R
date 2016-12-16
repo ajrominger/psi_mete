@@ -24,9 +24,32 @@ bciIPD <- ipd(meteESF(spp = bci$spp, abund = bci$count, power = bci$dbh^2))
 arthIPD <- ipd(meteESF(spp = arth$SpeciesCode, abund = arth$Abundance, power = arth$IND_BIOM^0.75))
 
 
+## plotting theory for BCI
+e <- exp(seq(log(1), log(500000), length = 1000))
+
+jpeg('ms/fig_PsiThr.jpg', width = 3, height = 3, units = 'in', res = 380)
+
+par(mar = c(3, 3, 0, 0) + 0.5, mgp = c(2, 0.75, 0))
+plot(e, bciIPD$d(e), log = 'xy', type = 'l', col = 'red',
+     xaxt = 'n', yaxt = 'n', ylim = 10^c(-12, 0),
+     xlab = 'Metabolic rate', ylab = 'Probability density',
+     panel.first = {
+         rect(xleft = 10, xright = 10000, ybottom = 10^par('usr')[3], ytop = 10^par('usr')[4],
+              col = 'gray60', border = NA)
+         rect(xleft = 10000, xright = 10^par('usr')[2], ybottom = 10^par('usr')[3], ytop = 10^par('usr')[4],
+              col = 'gray80', border = NA)
+     })
+logAxis(1, expLab = TRUE)
+axis(2, at = 10^seq(-12, 0, by = 3), 
+     labels = sapply(seq(-12, 0, by = 3), 
+                     function(p) eval(substitute(expression(10^p), list(p = p)))))
+
+dev.off()
+
+
 ## plotting data and theory
 
-jpeg('ms/fig_PsiData.jpg', width = 8, height = 3, units = 'in', res = 200)
+jpeg('ms/fig_PsiData.jpg', width = 8, height = 3, units = 'in', res = 380)
 
 par(mfrow = c(1, 3), oma = c(3, 2, 0, 0) + 0.5, mar = c(0, 2, 1, 0) + 0.2, 
     cex = 1, mgp = c(2, 0.75, 0))
