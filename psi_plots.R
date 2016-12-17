@@ -1,4 +1,5 @@
 library(meteR)
+devtools::install_github('ajrominger/socorro')
 library(socorro)
 
 setwd('~/Dropbox/Research/psi_mete')
@@ -21,7 +22,8 @@ rmblIPD$data <- sort(rmbl$observed, decreasing = TRUE)
 
 bciIPD <- ipd(meteESF(spp = bci$spp, abund = bci$count, power = bci$dbh^2))
 
-arthIPD <- ipd(meteESF(spp = arth$SpeciesCode, abund = arth$Abundance, power = arth$IND_BIOM^0.75))
+arthIPD <- ipd(meteESF(spp = arth$SpeciesCode, abund = arth$Abundance, 
+                       power = arth$IND_BIOM^0.75))
 
 
 ## plotting theory for BCI
@@ -36,7 +38,8 @@ plot(e, bciIPD$d(e), log = 'xy', type = 'l', col = 'red',
      panel.first = {
          rect(xleft = 10, xright = 10000, ybottom = 10^par('usr')[3], ytop = 10^par('usr')[4],
               col = 'gray60', border = NA)
-         rect(xleft = 10000, xright = 10^par('usr')[2], ybottom = 10^par('usr')[3], ytop = 10^par('usr')[4],
+         rect(xleft = 10000, xright = 10^par('usr')[2], 
+              ybottom = 10^par('usr')[3], ytop = 10^par('usr')[4],
               col = 'gray80', border = NA)
      })
 logAxis(1, expLab = TRUE)
