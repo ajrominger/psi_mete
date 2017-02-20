@@ -21,9 +21,31 @@ rmblIPD <- ipd(meteESF(S0 = 31, N0 = 877, E0 = sum(rmbl$observed)))
 rmblIPD$data <- sort(rmbl$observed, decreasing = TRUE)
 
 bciIPD <- ipd(meteESF(spp = bci$spp, abund = bci$count, power = bci$dbh^2))
+## metabolic scaling from Mori et al. PNAS paper
+bciIPDmori <- ipd(meteESF(spp = bci$spp, abund = bci$count, power = (bci$dbh^(8/3))^0.805))
+
+pdf('fig_bciPsiMori.pdf', width = 5, height = 5)
+plot(bciIPD, log = 'xy', axes = FALSE)
+logAxis(1)
+logAxis(2)
+box()
+dev.off()
 
 arthIPD <- ipd(meteESF(spp = arth$SpeciesCode, abund = arth$Abundance, 
                        power = arth$IND_BIOM^0.75))
+
+
+
+
+b = d^2
+
+b = m^(3/4)
+
+m^(3/4) = d^2
+
+m = d^(2*4/3)
+d = m^(3/(4*2))
+
 
 
 ## plotting theory for BCI
