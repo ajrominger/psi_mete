@@ -35,19 +35,6 @@ arthIPD <- ipd(meteESF(spp = arth$SpeciesCode, abund = arth$Abundance,
                        power = arth$IND_BIOM^0.75))
 
 
-
-
-b = d^2
-
-b = m^(3/4)
-
-m^(3/4) = d^2
-
-m = d^(2*4/3)
-d = m^(3/(4*2))
-
-
-
 ## plotting theory for BCI
 e <- exp(seq(log(1), log(500000), length = 1000))
 
