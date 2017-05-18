@@ -9,7 +9,7 @@ rm(list=ls(all=TRUE))
 
 ##LOADING DATA##
 
-setwd("~/Desktop/Science_response")
+
 BCI<- read.csv("BCI_PSI_test_csv.csv", head=TRUE, sep=",")
 RMBL<- read.csv("RMBL_PSI_test.csv", head=TRUE, sep=",")
 
