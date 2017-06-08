@@ -38,9 +38,9 @@ arthIPD <- ipd(meteESF(spp = arth$SpeciesCode, abund = arth$Abundance,
 ## plotting theory for BCI
 e <- exp(seq(log(1), log(500000), length = 1000))
 
-jpeg('ms/fig_PsiThr.jpg', width = 3, height = 3, units = 'in', res = 380)
+jpeg('ms/fig_PsiThr.jpg', width = 6, height = 3, units = 'in', res = 380)
 
-par(mar = c(3, 3, 0, 0) + 0.5, mgp = c(2, 0.75, 0))
+par(mfrow = 1:2, mar = c(3, 3, 0.7, 0) + 0.5, mgp = c(2, 0.75, 0))
 plot(e, bciIPD$d(e), log = 'xy', type = 'l', col = 'red',
      xaxt = 'n', yaxt = 'n', ylim = 10^c(-12, 0),
      xlab = 'Metabolic rate', ylab = 'Probability density',
@@ -55,6 +55,26 @@ logAxis(1, expLab = TRUE)
 axis(2, at = 10^seq(-12, 0, by = 3), 
      labels = sapply(seq(-12, 0, by = 3), 
                      function(p) eval(substitute(expression(10^p), list(p = p)))))
+mtext('A', side = 3, at = 10^(par('usr')[1] + 0.05 * diff(par('usr')[1:2])), line = 0.2)
+
+# plot rank plot
+n <- bciIPD$state.var['N0']
+plot(approx(bciIPD$p(exp(seq(log(1), log(10^7), length = 5000))), 
+            exp(seq(log(1), log(10^7), length = 5000)), 
+            xout = seq(1, 1/n, length.out = n) - 1/(2 * n))$y, 
+     log = 'xy', xlab = 'Rank', ylab = 'Metabolic rate', 
+     axes = FALSE, frame.plot = TRUE, type = 'l', col = 'red',
+     panel.first = {
+         rect(ybottom = 10, ytop = 10000, xleft = 10^par('usr')[1], xright = 10^par('usr')[2],
+              col = 'gray60', border = NA)
+         rect(ybottom = 10000, ytop = 10^par('usr')[4], 
+              xleft = 10^par('usr')[1], xright = 10^par('usr')[2],
+              col = 'gray80', border = NA)
+     })
+logAxis(1, expLab = TRUE)
+logAxis(2, expLab = TRUE)
+
+mtext('B', side = 3, at = 10^(par('usr')[1] + 0.05 * diff(par('usr')[1:2])), line = 0.2)
 
 dev.off()
 
