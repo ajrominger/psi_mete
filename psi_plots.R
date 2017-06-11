@@ -38,7 +38,8 @@ arthIPD <- ipd(meteESF(spp = arth$SpeciesCode, abund = arth$Abundance,
 ## plotting theory for BCI
 e <- exp(seq(log(1), log(500000), length = 1000))
 
-jpeg('ms/fig_PsiThr.jpg', width = 6, height = 3, units = 'in', res = 380)
+# jpeg('ms/fig_PsiThr.jpg', width = 6, height = 3, units = 'in', res = 380)
+pdf('ms/fig_PsiThr.pdf', width = 6, height = 3)
 
 par(mfrow = 1:2, mar = c(3, 3, 0.7, 0) + 0.5, mgp = c(2, 0.75, 0))
 plot(e, bciIPD$d(e), log = 'xy', type = 'l', col = 'red',
@@ -81,7 +82,8 @@ dev.off()
 
 ## plotting data and theory
 
-jpeg('ms/fig_PsiData.jpg', width = 8, height = 3, units = 'in', res = 380)
+# jpeg('ms/fig_PsiData.jpg', width = 8, height = 3, units = 'in', res = 380)
+pdf('ms/fig_PsiData.pdf', width = 8, height = 3)
 
 par(mfrow = c(1, 3), oma = c(3, 2, 0, 0) + 0.5, mar = c(0, 2, 1, 0) + 0.2, 
     cex = 1, mgp = c(2, 0.75, 0))
