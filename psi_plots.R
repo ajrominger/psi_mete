@@ -42,7 +42,7 @@ e <- exp(seq(log(1), log(500000), length = 1000))
 pdf('ms/fig_PsiThr.pdf', width = 6, height = 3)
 
 par(mfrow = 1:2, mar = c(3, 3, 0.7, 0) + 0.5, mgp = c(2, 0.75, 0))
-plot(e, bciIPD$d(e), log = 'xy', type = 'l', col = 'red',
+plot(e, bciIPD$d(e), log = 'xy', type = 'l', col = 'black',
      xaxt = 'n', yaxt = 'n', ylim = 10^c(-12, 0),
      xlab = 'Metabolic rate', ylab = 'Probability density',
      panel.first = {
@@ -64,7 +64,7 @@ plot(approx(bciIPD$p(exp(seq(log(1), log(10^7), length = 5000))),
             exp(seq(log(1), log(10^7), length = 5000)), 
             xout = seq(1, 1/n, length.out = n) - 1/(2 * n))$y, 
      log = 'xy', xlab = 'Rank', ylab = 'Metabolic rate', 
-     axes = FALSE, frame.plot = TRUE, type = 'l', col = 'red',
+     axes = FALSE, frame.plot = TRUE, type = 'l', col = 'black',
      panel.first = {
          rect(ybottom = 10, ytop = 10000, xleft = 10^par('usr')[1], xright = 10^par('usr')[2],
               col = 'gray60', border = NA)
@@ -90,23 +90,23 @@ par(mfrow = c(1, 3), oma = c(3, 2, 0, 0) + 0.5, mar = c(0, 2, 1, 0) + 0.2,
 
 plot(exp(bcitest$ln.rank.), exp(bcitest$ln.dbh2.), log = 'xy',
      ylim = c(1, 300000), xaxt = 'n', yaxt = 'n',
-     xlab = '', ylab = '')
-points(exp(bcitest$ln.rank.), exp(bcitest$ln.PRED_METE.), type = 'l', col = 'red')
+     xlab = '', ylab = '', col = 'gray')
+points(exp(bcitest$ln.rank.), exp(bcitest$ln.PRED_METE.), type = 'l', col = 'black')
 logAxis(1, expLab = TRUE)
 logAxis(2, expLab = TRUE)
 legend('topright', legend = c('Data', 'METE'), pch = c(1, NA), lwd = c(NA, 1), 
-       col = c('black', 'red'), bty = 'n', cex = 0.9)
+       col = c('gray', 'black'), bty = 'n', cex = 0.9)
 mtext('A', side = 3, at = 10^(par('usr')[1] + 0.05 * diff(par('usr')[1:2])), line = 0.2)
 
 plot(rmblIPD, ptype = 'rad', log = 'xy', add.legend = FALSE, 
      ylim = c(1, 100000), xaxt = 'n', yaxt = 'n',
-     xlab = '', ylab = '')
+     xlab = '', ylab = '', th.col = 'black', col = 'gray')
 logAxis(1, expLab = TRUE)
 logAxis(2, expLab = TRUE)
 mtext('B', side = 3, at = 10^(par('usr')[1] + 0.05 * diff(par('usr')[1:2])), line = 0.2)
 
 plot(arthIPD, ptype = 'rad', log = 'xy', add.legend = FALSE,
-     xaxt = 'n', yaxt = 'n', xlab = '', ylab = '')
+     xaxt = 'n', yaxt = 'n', xlab = '', ylab = '', th.col = 'black', col = 'gray')
 logAxis(1, expLab = TRUE)
 logAxis(2, expLab = TRUE)
 mtext('C', side = 3, at = 10^(par('usr')[1] + 0.05 * diff(par('usr')[1:2])), line = 0.2)
